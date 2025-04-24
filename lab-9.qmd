@@ -1,11 +1,39 @@
 ---
 title: "lab-9"
 ---
+```{r}
+# spatial data science
+library(tidyverse)
+library(sf)
+library(units)
 
-## Quarto
+# Data
+library(AOI)
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+# Visualization
+library(gghighlight)
+library(ggrepel)
+library(knitr)
+
+eqdc <- '+proj=eqdc +lat_0=40 +lon_0=-96 +lat_1=20 +lat_2=60 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs'
+remotes::install_github("mikejohnson51/AOI") #state boundaries
+readr::read_csv(Users/racheldelorie/github/lab-9/data/uscities.csv)
+aoi_get(country = c("MX", "CA", "USA"))
+
+df <- data.frame(name = state.name, 
+                X = state.center$x, 
+                Y = state.center$y)
+# Geographic Coordinate System (GCS)
+(df_sf_gcs = st_as_sf(df, 
+                      coords = c("X", "Y"), 
+                      crs = 4269))
+# Projected Coordinate System (PCS)
+# st_transforms converts from one reference system to another
+(df_sf_pcs = st_transform(df_sf_gcs, 5070))
+
+```
 
 ```{r}
-1 + 1
+
 ```
+
